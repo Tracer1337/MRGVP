@@ -3,15 +3,27 @@ import {
   StyleSheet,
   View,
   WebView,
-  TouchableOpacity,
   Text
 } from 'react-native';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { WebBrowser } from 'expo';
+import { Icons } from 'react-native-fontawesome';
 import CustomButton from "../components/CustomButton";
 import Vertretungsplan from "../components/Vertretungsplan";
+import { AdMobBanner } from "expo"
 
 export default class HomeScreen extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return{
+      title: "Vertretungsplan",
+      headerLeft: (
+        <CustomButton
+          onPress={() => navigation.navigate("Menu")}
+          icon={Icons.bars}
+          fontStyle={{fontSize: 18, marginLeft: 22, marginTop: 6}}
+        />
+      )
+    }
+  }
 
   state = {
     page: 0,
@@ -27,16 +39,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
 
-        <View style={styles.header}>
-          <Text style={styles.headline}>Vertretungsplan: { this.getPageName(this.state.page) }</Text>
-          <CustomButton
-            onPress={() => []}
-            icon={Icons.bars}
-            fontStyle={styles.menuBtn}
-          />
-        </View>
-
-        <Vertretungsplan page={this.state.page} pageNr={this.state.pageNr}/>
+        <Vertretungsplan page={this.state.page} pageNr={this.state.pageNr} style={styles.vertretungsplan}/>
 
         <View style={styles.footer}>
 
@@ -62,6 +65,12 @@ export default class HomeScreen extends React.Component {
           >Nächste Seite</CustomButton>
 
         </View>
+
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitId="ca-app-pub-3609177996275417/3578932998"
+          testDevideID="EMULATOR"
+        />
 
       </View>
     );
@@ -91,22 +100,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  header: {
-    flex: 1/10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderBottomWidth: 1
-  },
-  headline: {
-    fontSize: 24,
-    fontWeight: "bold"
-  },
-  menuBtn: {
-    fontSize: 24,
-    paddingTop: 7.5
+  vertretungsplan: {
+    marginTop: 5
   },
   footer: {
     flex: 1/14,
@@ -121,6 +116,9 @@ const styles = StyleSheet.create({
     color: "#2f95dc",
     textAlign: "center",
   },
-  switchPage: { flex: 2 },
+  switchPage: {
+    flex: 2,
+    borderRightWidth: 1
+  },
   chevron: { flex: 1 }
 });

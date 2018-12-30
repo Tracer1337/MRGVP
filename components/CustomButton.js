@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import FontAwesome  from 'react-native-fontawesome';
 
 export default class CustomButton extends Component{
   render(){

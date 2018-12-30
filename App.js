@@ -3,12 +3,14 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { createAppContainer, createStackNavigator } from "react-navigation"
 import HomeScreen from "./screens/HomeScreen"
+import MenuScreen from "./screens/MenuScreen"
+import ImprintScreen from "./screens/ImprintScreen"
 
 const Rootstack = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen
-    }
+    Home: HomeScreen,
+    Menu: MenuScreen,
+    Imprint: ImprintScreen
   },
   {
     initialRouteName: "Home"
@@ -33,10 +35,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <React.Fragment>
-          <StatusBar hidden />
-          <AppContainer />
-        </React.Fragment>
+        <AppContainer />
       );
     }
   }

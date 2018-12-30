@@ -17,6 +17,7 @@ export default class Vertretungsplan extends Component{
       source={{uri: `http://www.mrg-online.de/upload/Untis_${this.props.page === 0 ? "Schueler" : "Lehrer"}/subst_${this.parsePageNr(this.props.pageNr)}.htm`}}
       scalesPageToFit={false}
       onLoadEnd={() => this.init()}
+      style={this.props.style}
     />
     )
   }
