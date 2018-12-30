@@ -1,21 +1,64 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { AppLoading, Asset, Font, Icon } from 'expo';
+import { createAppContainer, createStackNavigator } from "react-navigation"
+import HomeScreen from "./screens/HomeScreen"
+
+const Rootstack = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen
+    }
+  },
+  {
+    initialRouteName: "Home"
+  }
+)
+
+const AppContainer = createAppContainer(Rootstack)
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
+  state = {
+    isLoadingComplete: false,
+  };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  render() {
+    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <StatusBar hidden />
+          <AppContainer />
+        </React.Fragment>
+      );
+    }
+  }
+
+  _loadResourcesAsync = async () => {
+    return Promise.all([
+      Asset.loadAsync([
+        //require('./assets/images/robot-dev.png'),
+      ]),
+      Font.loadAsync({
+        'fa_regular_400': require('./assets/fonts/fa-regular-400.ttf'),
+        'fa_solid_900': require('./assets/fonts/fa-solid-900.ttf'),
+        'fa_brands_400': require('./assets/fonts/fa-brands-400.ttf'),
+      }),
+    ]);
+  };
+
+  _handleLoadingError = error => {
+    console.warn(error);
+  };
+
+  _handleFinishLoading = () => {
+    this.setState({ isLoadingComplete: true });
+  };
+}
