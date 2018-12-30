@@ -5,6 +5,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation"
 import HomeScreen from "./screens/HomeScreen"
 import MenuScreen from "./screens/MenuScreen"
 import ImprintScreen from "./screens/ImprintScreen"
+import { AdMobBanner } from "expo"
 
 const Rootstack = createStackNavigator(
   {
@@ -35,7 +36,14 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <AppContainer />
+        <React.Fragment>
+          <AppContainer />
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitId="ca-app-pub-3609177996275417/1082785682"
+            testDevideID="EMULATOR"
+          />
+        </React.Fragment>
       );
     }
   }

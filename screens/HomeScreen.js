@@ -8,7 +8,6 @@ import {
 import { Icons } from 'react-native-fontawesome';
 import CustomButton from "../components/CustomButton";
 import Vertretungsplan from "../components/Vertretungsplan";
-import { AdMobBanner } from "expo"
 
 export default class HomeScreen extends React.Component {
 
@@ -65,12 +64,6 @@ export default class HomeScreen extends React.Component {
           >Nächste Seite</CustomButton>
 
         </View>
-
-        <AdMobBanner
-          bannerSize="fullBanner"
-          adUnitId="ca-app-pub-3609177996275417/3578932998"
-          testDevideID="EMULATOR"
-        />
 
       </View>
     );

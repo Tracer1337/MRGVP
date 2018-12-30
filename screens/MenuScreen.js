@@ -15,10 +15,6 @@ export default class MenuScreen extends React.Component{
 
   entrys = [
     {
-      title: "Einstellungen",
-      link: "Settings"
-    },
-    {
       title: "Impressum",
       link: "Imprint"
     }
