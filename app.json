@@ -2,6 +2,7 @@
   "expo": {
     "name": "Vertretungsplan",
     "slug": "vertretungsplan",
+    "description": "Der MRG Vertretungsplan als App",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [
@@ -24,6 +25,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.vertretungsplan"
     }
   }
 }
