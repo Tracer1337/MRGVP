@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MRGVP",
-    "slug": "MRGVP",
+    "name": "Vertretungsplan",
+    "slug": "vertretungsplan",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": [

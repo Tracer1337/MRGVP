@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1/14,
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingBottom: 7.5,
+    marginBottom: 15,
     paddingTop: 5,
     borderTopWidth: 1
   },
@@ -109,9 +109,6 @@ const styles = StyleSheet.create({
     color: "#2f95dc",
     textAlign: "center",
   },
-  switchPage: {
-    flex: 2,
-    borderRightWidth: 1
-  },
+  switchPage: { flex: 2 },
   chevron: { flex: 1 }
 });

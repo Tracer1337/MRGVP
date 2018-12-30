@@ -40,12 +40,17 @@ export default class App extends React.Component {
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
-            adUnitId="ca-app-pub-3609177996275417/1082785682"
-            testDevideID="EMULATOR"
+            adUnitID="ca-app-pub-3609177996275417/1082785682"
+            testDeviceID="EMULATOR"
+            didFailToReceiveAdWithError={this.bannerError}
           />
         </React.Fragment>
       );
     }
+  }
+
+  bannerError(){
+    return;
   }
 
   _loadResourcesAsync = async () => {
