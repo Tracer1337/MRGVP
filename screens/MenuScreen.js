@@ -15,8 +15,12 @@ export default class MenuScreen extends React.Component{
 
   entrys = [
     {
-      title: "Impressum",
-      link: "Imprint"
+      title: "Schulkalender",
+      link: "Calender"
+    },
+    {
+      title: "Kontakt",
+      link: "Contact"
     }
   ]
 
