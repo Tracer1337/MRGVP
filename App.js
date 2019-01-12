@@ -7,13 +7,15 @@ import HomeScreen from "./screens/HomeScreen"
 import MenuScreen from "./screens/MenuScreen"
 import ContactScreen from "./screens/ContactScreen"
 import CalenderScreen from "./screens/CalenderScreen"
+import PrivacyScreen from "./screens/PrivacyScreen"
 
 const Rootstack = createStackNavigator(
   {
     Home: HomeScreen,
     Menu: MenuScreen,
     Contact: ContactScreen,
-    Calender: CalenderScreen
+    Calender: CalenderScreen,
+    Privacy: PrivacyScreen,
   },
   {
     initialRouteName: "Home"
@@ -42,7 +44,7 @@ export default class App extends React.Component {
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
-            adUnitID="ca-app-pub-3940256099942544/6300978111"
+            adUnitID={__DEV__ ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3609177996275417/1082785682"}
             testDeviceID="EMULATOR"
             didFailToReceiveAdWithError={this.bannerError}
           />
@@ -50,6 +52,7 @@ export default class App extends React.Component {
       );
     }
   }
+  //"ca-app-pub-3940256099942544/6300978111"
   //{__DEV__ ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3609177996275417/1082785682"}
   bannerError(){
     return;
