@@ -44,15 +44,16 @@ export default class App extends React.Component {
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
-            adUnitID={__DEV__ ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3609177996275417/1082785682"}
-            testDeviceID="EMULATOR"
+            adUnitID="ca-app-pub-3609177996275417/1082785682"
             didFailToReceiveAdWithError={this.bannerError}
           />
         </React.Fragment>
       );
     }
   }
-  //"ca-app-pub-3940256099942544/6300978111"
+  // ---ADS---
+  //TEST KEY: ca-app-pub-3940256099942544/6300978111
+  //AD KEY: ca-app-pub-3609177996275417/1082785682
   //{__DEV__ ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3609177996275417/1082785682"}
   bannerError(){
     return;
