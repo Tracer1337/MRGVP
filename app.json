@@ -27,7 +27,10 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.vertretungsplan"
+      "package": "com.vertretungsplan",
+      "versionCode": 2,
+      "permissions": [],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.vertretungsplan"
     }
   }
 }
