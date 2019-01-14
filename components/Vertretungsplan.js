@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import {
   WebView,
-  Dimensions
+  Text,
+  StyleSheet,
 } from 'react-native';
 
 export default class Vertretungsplan extends Component{
@@ -11,14 +12,18 @@ export default class Vertretungsplan extends Component{
   }
 
   render(){
+    const url = `http://www.mrg-online.de/upload/Untis_${this.props.page === 0 ? "Schueler" : "Lehrer"}/subst_${this.parsePageNr(this.props.pageNr)}.htm`;
     return (
-    <WebView
-      ref={ref => this.webview = ref}
-      source={{uri: `http://www.mrg-online.de/upload/Untis_${this.props.page === 0 ? "Schueler" : "Lehrer"}/subst_${this.parsePageNr(this.props.pageNr)}.htm`}}
-      scalesPageToFit={false}
-      onLoadEnd={this.init.bind(this)}
-      style={this.props.style}
-    />
+    <React.Fragment>
+      <Text style={styles.url}>Quelle: http://www.mrg-online.de/</Text>
+      <WebView
+        ref={ref => this.webview = ref}
+        source={{uri: url}}
+        scalesPageToFit={false}
+        onLoadEnd={this.init.bind(this)}
+        style={this.props.style}
+      />
+    </React.Fragment>
     )
   }
 
@@ -26,3 +31,9 @@ export default class Vertretungsplan extends Component{
     return ("000" + num).substr(-3,3)
   }
 }
+
+const styles = StyleSheet.create({
+  url: {
+    fontSize: 10,
+  }
+})
