@@ -44,7 +44,7 @@ export default class App extends React.Component {
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
-            adUnitID="ca-app-pub-3609177996275417/1082785682"
+            adUnitID="ca-app-pub-3940256099942544/6300978111"
             didFailToReceiveAdWithError={this.bannerError}
           />
         </React.Fragment>

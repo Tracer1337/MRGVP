@@ -18,10 +18,15 @@ export default class HomeScreen extends React.Component {
         <CustomButton
           onPress={() => navigation.navigate("Menu")}
           icon={Icons.bars}
-          fontStyle={{fontSize: 18, marginLeft: 22, marginTop: 6}}
+          iconStyle={{fontSize: 18, marginLeft: 22, marginTop: 6}}
         />
       )
     }
+  }
+
+  constructor(props){
+    super(props)
+    this.lastSite = this.lastSite.bind(this)
   }
 
   state = {
@@ -34,58 +39,65 @@ export default class HomeScreen extends React.Component {
     1: "Lehrer"
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
+  getPageName = num => this.pages[num]
 
-        <Vertretungsplan page={this.state.page} pageNr={this.state.pageNr} style={styles.vertretungsplan}/>
-
-        <View style={styles.footer}>
-
-          <CustomButton
-            onPress={this.switchPage.bind(this)}
-            icon={Icons.retweet}
-            style={styles.switchPage}
-            fontStyle={styles.button}
-          >Zum { this.getPageName(this.state.page === 0 ? 1 : 0) }plan</CustomButton>
-
-          <CustomButton
-            onPress={this.backward.bind(this)}
-            icon={Icons.chevronLeft}
-            style={styles.chevron}
-            fontStyle={styles.button}
-          >Vorige Seite</CustomButton>
-
-          <CustomButton
-            onPress={this.forward.bind(this)}
-            icon={Icons.chevronRight}
-            style={styles.chevron}
-            fontStyle={styles.button}
-          >Nächste Seite</CustomButton>
-
-        </View>
-
-      </View>
-    );
-  }
-
-  switchPage(){
+  switchPage = () => {
     this.setState({
       page: this.state.page === 0 ? 1 : 0,
       pageNr: 1
     })
   }
 
-  forward(){
-    this.setState({ pageNr: this.state.pageNr + 1 })
+  forward = () => this.setState({ pageNr: this.state.pageNr + 1 })
+
+  backward = () => this.setState({ pageNr: this.state.pageNr <= 1 ? 1 : this.state.pageNr - 1 })
+
+  //Boolean([].filter.call(document.getElementsByTagName("meta"), e => e.getAttribute("content").includes("URL=subst_001.htm")).length)
+  lastSite(){
+    return false
   }
 
-  backward(){
-    this.setState({ pageNr: this.state.pageNr <= 1 ? 1 : this.state.pageNr - 1 })
-  }
+  render() {
+    return (
+      <View style={styles.container}>
 
-  getPageName(num){
-    return this.pages[num]
+        <Vertretungsplan
+          page={this.state.page}
+          pageNr={this.state.pageNr}
+          style={styles.vertretungsplan}
+          ref={ref => this.vp = ref}
+          onMessage={data => console.log("Recieved", data)}
+        />
+
+        <View style={styles.footer}>
+
+          <CustomButton
+            icon={Icons.retweet}
+            style={styles.switchPage}
+            iconStyle={styles.button}
+            disabled
+          >Zum Lehrerplan</CustomButton>
+
+          <CustomButton
+            onPress={this.backward.bind(this)}
+            icon={Icons.chevronLeft}
+            style={styles.chevron}
+            iconStyle={styles.button}
+            disabled={this.state.pageNr <= 1}
+          >Vorige Seite</CustomButton>
+
+          <CustomButton
+            onPress={this.forward.bind(this)}
+            icon={Icons.chevronRight}
+            style={styles.chevron}
+            iconStyle={styles.button}
+            disabled={this.lastSite()}
+          >Nächste Seite</CustomButton>
+
+        </View>
+
+      </View>
+    );
   }
 }
 

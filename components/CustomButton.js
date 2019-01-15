@@ -8,12 +8,18 @@ import FontAwesome  from 'react-native-fontawesome';
 
 export default class CustomButton extends Component{
   render(){
+    let iconStyle = {}
+    let fontStyle = {}
+    if(this.props.disabled){
+      iconStyle={...this.props.iconStyle, color:"#95a5a6"}
+      fontStyle={color:"#95a5a6"}
+    }
     return(
-      <TouchableOpacity style={this.props.style} onPress={this.props.onPress}>
-        <FontAwesome style={this.props.fontStyle}>
+      <TouchableOpacity style={this.props.style} onPress={this.props.onPress} disabled={this.props.disabled}>
+        <FontAwesome style={{...this.props.iconStyle, ...iconStyle}}>
           {this.props.icon}
         </FontAwesome>
-        <Text style={styles.subtitle}>{this.props.children}</Text>
+        <Text style={{...styles.subtitle, ...this.props.fontStyle, ...fontStyle}}>{this.props.children}</Text>
       </TouchableOpacity>
     )
   }
