@@ -1,18 +1,65 @@
 import React, { Component } from "react"
 import {
-  WebView,
+  FlatList,
   Text,
+  View,
   StyleSheet,
 } from 'react-native';
+import cheerio from "react-native-cheerio"
 
 export default class Vertretungsplan extends Component{
 
-  init(){
-    this.webview.injectJavaScript("window.stop();const meta=document.createElement('meta');meta.setAttribute('content','width=device-width,initial-scale=0.5,maximum-scale=0.5,user-scalable=0');meta.setAttribute('name','viewport');document.getElementsByTagName('head')[0].appendChild(meta);")
+  state = {
+    data: [
+      {name: "Test1"},
+      {name: "Test2"},
+      {name: "Test3"}
+    ]
   }
 
-  emit(msg){
-    this.webview.postMessage("msg")
+  getData(i = 1, state = null, res = []){
+    const getState = str => str.match(/Stand: [0-9:. ]+/g)[0].replace("Stand: ", "")
+    const getWeekday = str => str.match(/[0-9]+.[0-9]+.[0-9]+ [A-z]+/g)[0]
+
+    const pad = num => ("000" + num).substr(-3,3)
+
+    console.log(`Fetching https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
+    fetch(`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
+      .then(res => res.text())
+      .then(html => {
+        const $ = cheerio.load(html)
+        // GET DATE
+        if(i === 1) state = getState($("body").text())
+        currentPageState = getState($("body").text())
+        if(state === currentPageState){
+           // GET WEEKDAY
+           const weekday = getWeekday($(".mon_title").text())
+           // GET ENTRYS
+           const fields = $("td.list").map((i, e) => $(e).text()).get()
+           const chunkLength = 7
+           const entrys = []
+
+           for(let i = 0; i < fields.length/chunkLength; i++){
+             const temp = []
+             // chunkLength - 1 SINCE THE LAST FILD "Neu" SHOULDN'T BE INCLUDED
+             for(let j = 0; j < chunkLength - 1; j++){
+               temp.push(fields[i*chunkLength+j])
+             }
+             entrys.push(temp)
+           }
+           // INSERTING NEW ENTRYS IN RESULT OBJECT
+           res = res.concat(entrys)
+           this.getData(++i, state, res)
+         }else{
+           console.log(res)
+           this.setState({ data: res })
+         }
+      })
+      .catch(error => console.log(error))
+  }
+
+  componentDidMount(){
+    this.getData()
   }
 
   render(){
@@ -20,13 +67,21 @@ export default class Vertretungsplan extends Component{
     return (
     <React.Fragment>
       <Text style={styles.url}>Quelle: https://mrg-online.org/</Text>
-      <WebView
-        ref={ref => this.webview = ref}
-        source={{uri: url}}
-        scalesPageToFit={false}
-        onLoadEnd={this.init.bind(this)}
-        style={this.props.style}
-        onMessage={e => this.props.onMessage(e.nativeEvent.data) || null}
+      <FlatList
+        data={this.state.data}
+        renderItem={({item}) =>{
+          console.log(item)
+          return(
+            <View>
+              <Text style={styles.class}>{item[0]}</Text>
+              <Text style={styles.lesson}>{item[1]}</Text>
+              <Text style={styles.teacher}>{item[2]}</Text>
+              <Text style={styles.subject}>{item[3]}</Text>
+              <Text style={styles.room}>{item[4]}</Text>
+              <Text style={styles.comment}>{item[5]}</Text>
+            </View>
+          )
+        }}
       />
     </React.Fragment>
     )

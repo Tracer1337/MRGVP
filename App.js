@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon, AdMobBanner } from 'expo';
+import { AppLoading, Asset, Font, Icon, AdMobBanner, Constants } from 'expo';
 import { createAppContainer, createStackNavigator } from "react-navigation"
 
 import HomeScreen from "./screens/HomeScreen"
@@ -39,12 +39,15 @@ export default class App extends React.Component {
         />
       );
     } else {
+      // IF DEVELOPMENT MODE OR DEVELOP APP RELEASE SHOW TEST AD
+      if(__DEV__ || Constants.manifest.releaseChannel.indexOf("develop") !== -1) var ad = "ca-app-pub-3940256099942544/6300978111"
+      else var ad = "ca-app-pub-3609177996275417/1082785682"
       return (
         <React.Fragment>
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
-            adUnitID={__DEV__ ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3609177996275417/1082785682"}
+            adUnitID={ad}
             didFailToReceiveAdWithError={this.bannerError}
           />
         </React.Fragment>

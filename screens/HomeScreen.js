@@ -65,8 +65,6 @@ export default class HomeScreen extends React.Component {
           page={this.state.page}
           pageNr={this.state.pageNr}
           style={styles.vertretungsplan}
-          ref={ref => this.vp = ref}
-          onMessage={data => console.log("Recieved", data)}
         />
 
         <View style={styles.footer}>
