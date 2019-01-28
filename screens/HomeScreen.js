@@ -67,33 +67,6 @@ export default class HomeScreen extends React.Component {
           style={styles.vertretungsplan}
         />
 
-        <View style={styles.footer}>
-
-          <CustomButton
-            icon={Icons.retweet}
-            style={styles.switchPage}
-            iconStyle={styles.button}
-            disabled
-          >Zum Lehrerplan</CustomButton>
-
-          <CustomButton
-            onPress={this.backward.bind(this)}
-            icon={Icons.chevronLeft}
-            style={styles.chevron}
-            iconStyle={styles.button}
-            disabled={this.state.pageNr <= 1}
-          >Vorige Seite</CustomButton>
-
-          <CustomButton
-            onPress={this.forward.bind(this)}
-            icon={Icons.chevronRight}
-            style={styles.chevron}
-            iconStyle={styles.button}
-            disabled={this.lastSite()}
-          >Nächste Seite</CustomButton>
-
-        </View>
-
       </View>
     );
   }
@@ -122,3 +95,30 @@ const styles = StyleSheet.create({
   switchPage: { flex: 2 },
   chevron: { flex: 1 }
 });
+
+// <View style={styles.footer}>
+//
+//   <CustomButton
+//     icon={Icons.retweet}
+//     style={styles.switchPage}
+//     iconStyle={styles.button}
+//     disabled
+//   >Zum Lehrerplan</CustomButton>
+//
+//   <CustomButton
+//     onPress={this.backward.bind(this)}
+//     icon={Icons.chevronLeft}
+//     style={styles.chevron}
+//     iconStyle={styles.button}
+//     disabled={this.state.pageNr <= 1}
+//   >Vorige Seite</CustomButton>
+//
+//   <CustomButton
+//     onPress={this.forward.bind(this)}
+//     icon={Icons.chevronRight}
+//     style={styles.chevron}
+//     iconStyle={styles.button}
+//     disabled={this.lastSite()}
+//   >Nächste Seite</CustomButton>
+//
+// </View>

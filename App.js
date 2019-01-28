@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon, AdMobBanner, Constants } from 'expo';
 import { createAppContainer, createStackNavigator } from "react-navigation"
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import HomeScreen from "./screens/HomeScreen"
 import MenuScreen from "./screens/MenuScreen"
@@ -43,14 +44,14 @@ export default class App extends React.Component {
       if(__DEV__ || Constants.manifest.releaseChannel.indexOf("develop") !== -1) var ad = "ca-app-pub-3940256099942544/6300978111"
       else var ad = "ca-app-pub-3609177996275417/1082785682"
       return (
-        <React.Fragment>
+        <PaperProvider>
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"
             adUnitID={ad}
             didFailToReceiveAdWithError={this.bannerError}
           />
-        </React.Fragment>
+        </PaperProvider>
       );
     }
   }
