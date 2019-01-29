@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon, AdMobBanner, Constants } from 'expo';
 import { createAppContainer, createStackNavigator } from "react-navigation"
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 
 import HomeScreen from "./screens/HomeScreen"
 import MenuScreen from "./screens/MenuScreen"
@@ -22,6 +22,21 @@ const Rootstack = createStackNavigator(
     initialRouteName: "Home"
   }
 )
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    // primary: "#F44336",
+    // accent: "#F44336",
+    // background: "#F44336",
+    // surface: "#F44336",
+    // text: "#F44336",
+    // disabled: "#F44336",
+    // placeholder: "#F44336",
+    // backdrop: "#F44336"
+  }
+}
 
 const AppContainer = createAppContainer(Rootstack)
 
@@ -44,7 +59,7 @@ export default class App extends React.Component {
       if(__DEV__ || Constants.manifest.releaseChannel.indexOf("develop") !== -1) var ad = "ca-app-pub-3940256099942544/6300978111"
       else var ad = "ca-app-pub-3609177996275417/1082785682"
       return (
-        <PaperProvider>
+        <PaperProvider theme={theme}>
           <AppContainer />
           <AdMobBanner
             bannerSize="fullBanner"

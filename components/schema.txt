@@ -1,7 +1,0 @@
-{
-  Wochentag: {
-    Klasse: [
-      [Eintrag]
-    ]
-  }
-}

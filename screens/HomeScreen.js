@@ -13,7 +13,7 @@ export default class HomeScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return{
-      title: "Vertretungsplan",
+      title: "MRG Vertretungsplan",
       headerLeft: (
         <CustomButton
           onPress={() => navigation.navigate("Menu")}
