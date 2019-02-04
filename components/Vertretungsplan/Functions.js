@@ -106,7 +106,7 @@ export const planElements = plan => {
         </Surface>
       )
     }
-    classes.push(<List.Accordion title={cls} key={cls}>{weekdays}</List.Accordion>)
+    classes.push(<List.Accordion title={Boolean(cls.trim()) ? cls : "Sonstiges"} key={cls}>{weekdays}</List.Accordion>)
   }
   return classes
 }
