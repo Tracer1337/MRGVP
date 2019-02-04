@@ -1,3 +1,2 @@
-Placeholder fuer leere Felder
 Nach paar Sekunden, wenn der Plan nicht lädt, neu laden vorschlagen
 Suchfeld

@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "com.vertretungsplan",
-      "versionCode": 6,
+      "versionCode": 7,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.vertretungsplan"
     }
