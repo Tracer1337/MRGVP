@@ -21,8 +21,8 @@ export default class Vertretungsplan extends Component{
     }
   }
 
-  getData(i = 1, res = {info: {}, plan: {}}){
-    this.setState({ refreshing: true })
+  getData(i = 1, res = {info: [], plan: []}){
+
     console.log(`Fetching https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
     fetch(`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
       .then(res => res.text())
@@ -32,12 +32,15 @@ export default class Vertretungsplan extends Component{
         currentPageState = getState($("body").text())
         if(res.state === currentPageState){
            const weekday = parseWeekday($)
+
            parsePlan($, weekday, res)
+
            parseInfo($, weekday, res)
+
            this.getData(++i, res)
          }else{
-           this.setState({ data: res, refreshing: false })
-           console.log(res)
+           // FETCHED ALL DATA => DONE
+           this.setState({ data: res })
          }
       })
       .catch(error => console.log(error))
