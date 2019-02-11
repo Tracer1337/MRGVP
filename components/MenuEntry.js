@@ -1,32 +1,25 @@
 import React, { Component } from "react"
 import {
   StyleSheet,
-  TouchableOpacity,
-  Text
-} from 'react-native';
+} from 'react-native'
+import { TouchableRipple, Text } from "react-native-paper"
 
 export default class MenuEntry extends Component{
   render(){
     return(
-      <TouchableOpacity
+      <TouchableRipple
         onPress={this.props.onPress}
         style={styles.entry}
       >
         <Text style={styles.entryTitle}>{this.props.title}</Text>
-      </TouchableOpacity>
+      </TouchableRipple>
     )
   }
 }
 
 const styles = StyleSheet.create({
   entry: {
-    marginBottom: 8,
-    flexDirection: "row"
-  },
-  icon: {
-    fontSize: 22,
-    marginRight: 8,
-    marginTop: 4
+    marginBottom: 8
   },
   entryTitle: {
     fontSize: 24
