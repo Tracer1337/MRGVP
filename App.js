@@ -9,6 +9,7 @@ import MenuScreen from "./screens/MenuScreen"
 import ContactScreen from "./screens/ContactScreen"
 import CalenderScreen from "./screens/CalenderScreen"
 import PrivacyScreen from "./screens/PrivacyScreen"
+import FeedbackScreen from "./screens/FeedbackScreen"
 
 const Rootstack = createStackNavigator(
   {
@@ -17,6 +18,7 @@ const Rootstack = createStackNavigator(
     Contact: ContactScreen,
     Calender: CalenderScreen,
     Privacy: PrivacyScreen,
+    Feedback: FeedbackScreen
   },
   {
     initialRouteName: "Home"

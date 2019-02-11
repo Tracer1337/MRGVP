@@ -15,35 +15,44 @@ export default class Vertretungsplan extends Component{
   constructor(props){
     super(props)
     this.getData = this.getData.bind(this)
+    this.getDataDone = this.getDataDone.bind(this)
     this.state = {
       data: null,
-      refreshing: false
+      refreshing: false,
+      loadingStatus: "Initialisieren"
     }
   }
 
+  getDataDone = res => {
+    this.setState({ data: res, loadingStatus: "done", refreshing: false })
+  }
+
   getData(i = 1, res = {info: [], plan: []}){
-
-    console.log(`Fetching https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
-    fetch(`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`)
-      .then(res => res.text())
-      .then(html => {
-        const $ = cheerio.load(html)
-        if(i === 1) res.state = getState($("body").text())
-        currentPageState = getState($("body").text())
-        if(res.state === currentPageState){
-           const weekday = parseWeekday($)
-
-           parsePlan($, weekday, res)
-
-           parseInfo($, weekday, res)
-
-           this.getData(++i, res)
-         }else{
-           // FETCHED ALL DATA => DONE
-           this.setState({ data: res })
-         }
-      })
-      .catch(error => console.log(error))
+    this.setState({ refreshing: true })
+    let url =`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`
+    console.log(`Fetching ${url}`)
+    this.setState({ loadingStatus: `Seite ${i} wird geladen...` })
+    fetch(url)
+    .then(response => {
+      if(response.status == 200){
+        response.text().then(html => {
+          const $ = cheerio.load(html)
+          if(i === 1) res.state = getState($("body").text())
+          currentPageState = getState($("body").text())
+          if(res.state === currentPageState){
+             const weekday = parseWeekday($)
+             parsePlan($, weekday, res)
+             parseInfo($, weekday, res)
+             this.getData(++i, res)
+           }else{
+             this.getDataDone(res)
+           }
+        })
+      }else{
+        this.getDataDone(res)
+      }
+    })
+    .catch(error => console.log(error))
   }
 
   componentDidMount(){
@@ -64,6 +73,7 @@ export default class Vertretungsplan extends Component{
           />
         }
       >
+        {this.state.refreshing ? <Text>{this.state.loadingStatus}</Text> : null}
         <View style={styles.header}>
           <Text style={styles.headerText}>Quelle: https://mrg-online.org/</Text>
           <Text style={styles.headerText}>Stand: {this.state.data.state}</Text>
@@ -78,6 +88,9 @@ export default class Vertretungsplan extends Component{
       return(
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large"/>
+          <View style={styles.loadingCaption}>
+            <Text>{this.state.loadingStatus}</Text>
+          </View>
         </View>
       )
     }
@@ -111,5 +124,10 @@ const styles = StyleSheet.create({
   },
   headline: {
     marginLeft: 10
+  },
+  loadingCaption: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 10
   }
 })

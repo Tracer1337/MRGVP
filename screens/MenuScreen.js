@@ -21,6 +21,10 @@ export default class MenuScreen extends React.Component{
     {
       title: "Kontakt",
       link: "Contact"
+    },
+    {
+      title: "Feedback",
+      link: "Feedback"
     }
   ]
 
