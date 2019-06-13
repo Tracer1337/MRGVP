@@ -2,26 +2,26 @@ const getState = str => str.match(/Stand: [0-9:. ]+/g)[0].replace("Stand: ", "")
 const getWeekday = str => str.match(/[0-9]+.[0-9]+.[0-9]+ [A-z]+/g)[0]
 const getClass = str => str.substr(0, str.indexOf(" ") !== -1 ? str.indexOf(" ") : str.length)
 
-const sort = arr => {
-  //SEPERATE KEYS IN ARRAY
-  const keys = Object.keys(arr)
-  //SORT THE KEYS
-  keys.sort((a,b) => {
-    // FILTER "MP" AND EMPTY FIELD
-    if(a.indexOf("MP") !== -1 || !Boolean(a.trim())) return 1
-    if(b.indexOf("MP") !== -1 || !Boolean(b.trim())) return -1
-    a = parseInt(getClass(a))
-    b = parseInt(getClass(b))
-    // FILTER NaN => S1/2 & S3/4
-    if(!a) return 1
-    if(!b) return -1
-    return a - b
-  });
-  //BUILD SORTED ARRAY
-  const sorted = []
-  for(let i = 0; i < keys.length; i++) sorted[keys[i]] = arr[keys[i]]
-  return sorted;
-}
+// const sort = arr => {
+//   // SEPERATE KEYS IN ARRAY
+//   const keys = Object.keys(arr)
+//   // SORT THE KEYS
+//   keys.sort((a,b) => {
+//     // FILTER "MP" AND EMPTY FIELD
+//     if(a.indexOf("MP") !== -1 || !Boolean(a.trim())) return 1
+//     if(b.indexOf("MP") !== -1 || !Boolean(b.trim())) return -1
+//     a = parseInt(getClass(a))
+//     b = parseInt(getClass(b))
+//     // FILTER NaN => S1/2 & S3/4
+//     if(!a) return 1
+//     if(!b) return -1
+//     return a - b
+//   });
+//   // BUILD SORTED ARRAY
+//   const sorted = []
+//   for(let i = 0; i < keys.length; i++) sorted[keys[i]] = arr[keys[i]]
+//   return sorted;
+// }
 
 const pad = num => ("000" + num).substr(-3,3)
 
@@ -43,7 +43,7 @@ const parsePlan = ($, weekday, res) => {
     const entry = []
     const cls = fields[i*chunkLength] // ENTRY'S CORRESPONDING CLASS
 
-    if(!res.plan[cls]) res.plan[cls] = []
+    if(!res.plan[cls]) res.plan[cls] = {}
     if(!res.plan[cls][weekday]) res.plan[cls][weekday] = []
 
     // chunkLength - 1 SINCE THE LAST FILD "Neu" SHOULDN'T BE INCLUDED
@@ -54,7 +54,7 @@ const parsePlan = ($, weekday, res) => {
     // INSERTING NEW ENTRY IN RESULT OBJECT
     res.plan[cls][weekday].push(entry)
   }
-  res.plan = sort(res.plan)
+  // res.plan = sort(res.plan)
 }
 
 const parseInfo = ($, weekday, res) => {
@@ -69,7 +69,6 @@ module.exports = {
   getState,
   getWeekday,
   getClass,
-  sort,
   pad,
   parseWeekday,
   parsePlan,

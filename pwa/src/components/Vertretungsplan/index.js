@@ -1,34 +1,13 @@
 import React, { Component } from "react"
-import jquery from "jquery"
+import Information from "./Elements/Information.js"
 
 export default class Vertretungsplan extends Component{
   state = {data: null}
 
-  getData = (i = 1, res = {info: [], plan: []}) => {
-    let url =`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${i.toString().padStart(3, 0)}.htm`
-    fetch(url)
-    .then(response => {
-      console.log(response)
-      if(response.status === 200){
-        response.text().then(html => {
-          console.log("HTML:", html)
-          const $ = jquery(jquery.parseHTML(html))
-          // if(i === 1) res.state = getState($("body").text())
-          // currentPageState = getState($("body").text())
-          // if(res.state === currentPageState){
-          //    const weekday = parseWeekday($)
-          //    parsePlan($, weekday, res)
-          //    parseInfo($, weekday, res)
-          //    this.getData(++i, res)
-          //  }else{
-          //    this.setState({data: res})
-          //  }
-        })
-      }else{
-        this.setState({data: res})
-      }
-    })
-    .catch(console.log)
+  getData = async () => {
+    const response = await fetch("http://localhost/api")
+    const data = await response.json()
+    this.setState({data})
   }
 
   componentDidMount(){
@@ -36,10 +15,12 @@ export default class Vertretungsplan extends Component{
   }
 
   render(){
+    if(!this.state.data) return <div>Loading...</div>
+    const {info, plan} = this.state.data
     return(
       <div>
         Vertretungsplan
-        {this.state.data}
+        <Information info={info}/>
       </div>
     )
   }

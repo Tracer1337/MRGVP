@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "jquery": "^3.4.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
