@@ -1,4 +1,7 @@
 import React from "react"
+import ExpansionPanel from "@material-ui/core/ExpansionPanel"
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 
 const Entry = ({title, value}) => (
   <div style={{ flex: 1, alignSelf: 'stretch', flexDirection: 'row' }}>
@@ -18,7 +21,7 @@ export default ({plan}) => {
         const lastElement = i < plan[cls][weekday].length - 1
         entrys.push(
           <React.Fragment key={`${cls}-${weekday}-${entry[0]}-${entry[1]}-${entry[2]}`} >
-            <div style={{}}>
+            <div>
               <h3>Stunde: {entry[0]}</h3>
               <Entry title="Vertreter:" value={entry[1]}/>
               <Entry title="Fach:"      value={entry[2]}/>
@@ -30,14 +33,23 @@ export default ({plan}) => {
         )
       }
       weekdays.push(
-        <div key={`${cls}-${weekday}`} style={{}}>
+        <div key={`${cls}-${weekday}`}>
           <h3 style={{}}>{weekday}</h3>
           <hr/>
           {entrys}
         </div>
       )
     }
-    classes.push(<ul title={Boolean(cls.trim()) ? cls : "Sonstiges"} key={cls}>{weekdays}</ul>)
+    classes.push(
+      <ExpansionPanel key={cls}>
+        <ExpansionPanelSummary>
+          {Boolean(cls.trim()) ? cls : "Sonstiges"}
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          {weekdays}
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    )
   }
   return classes
 }
