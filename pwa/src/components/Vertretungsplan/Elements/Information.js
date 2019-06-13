@@ -8,10 +8,11 @@ export default ({info}) => {
     const entrys = []
     for(let i = 0; i < info[weekday].length; i++){
       const singleInformation = info[weekday][i]
-      // const lastElement = i < info[weekday].length - 1
+      const lastElement = i < info[weekday].length - 1
       entrys.push(
         <li key={`${weekday}-${singleInformation}`} >
           <span>{singleInformation}</span>
+          {lastElement ? <hr/> : null}
         </li>
       )
     }

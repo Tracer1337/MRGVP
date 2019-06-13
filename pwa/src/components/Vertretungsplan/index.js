@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import Information from "./Elements/Information.js"
+import Plan from "./Elements/Plan.js"
 
 export default class Vertretungsplan extends Component{
   state = {data: null}
@@ -18,9 +19,10 @@ export default class Vertretungsplan extends Component{
     if(!this.state.data) return <div>Loading...</div>
     const {info, plan} = this.state.data
     return(
-      <div>
+      <div style={{margin: 10}}>
         Vertretungsplan
         <Information info={info}/>
+        <Plan plan={plan}/>
       </div>
     )
   }
