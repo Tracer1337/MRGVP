@@ -1,8 +1,10 @@
-import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon, AdMobBanner, Constants } from 'expo';
+import React from 'react'
+import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import { AppLoading, Icon, Constants } from 'expo'
+import { AdMobBanner } from "expo-ads-admob"
+import * as Font from "expo-font"
 import { createAppContainer, createStackNavigator } from "react-navigation"
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 
 import HomeScreen from "./screens/HomeScreen"
 import MenuScreen from "./screens/MenuScreen"
@@ -82,9 +84,6 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      Asset.loadAsync([
-        //require('./assets/images/robot-dev.png'),
-      ]),
       Font.loadAsync({
         'fa_regular_400': require('./assets/fonts/fa-regular-400.ttf'),
         'fa_solid_900': require('./assets/fonts/fa-solid-900.ttf'),

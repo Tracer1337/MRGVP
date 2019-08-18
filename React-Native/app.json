@@ -4,12 +4,12 @@
     "slug": "vertretungsplan",
     "description": "Der MRG Vertretungsplan als App",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "2.0.0",
+    "version": "2.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "com.vertretungsplan",
-      "versionCode": 8,
+      "versionCode": 10,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.vertretungsplan"
     }
