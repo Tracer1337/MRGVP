@@ -27,8 +27,6 @@ export const sort = arr => {
   return sorted;
 }
 
-export const pad = num => ("000" + num).substr(-3,3)
-
 export const parseWeekday = $ => {
   // GET WEEKDAY AND PARSE IT TO SCHEMA "<WEEKDAY> (<DATE>)"
   let weekday = getWeekday($(".mon_title").text())
@@ -39,7 +37,7 @@ export const parseWeekday = $ => {
 export const parsePlan = ($, weekday, res) => {
   // GET ENTRYS
   const fields = $("td.list").map((i, e) => $(e).text()).get()
-  const chunkLength = 7
+  const chunkLength = 6
 
   // ITERATING THROUGH ALL ENTRYS ON PAGE
   for(let i = 0; i < fields.length/chunkLength; i++){
@@ -50,8 +48,7 @@ export const parsePlan = ($, weekday, res) => {
     if(!res.plan[cls]) res.plan[cls] = []
     if(!res.plan[cls][weekday]) res.plan[cls][weekday] = []
 
-    // chunkLength - 1 SINCE THE LAST FILD "Neu" SHOULDN'T BE INCLUDED
-    for(let j = 1; j < chunkLength - 1; j++){
+    for(let j = 1; j < chunkLength; j++){
       // COMPUTING ONE FIELD OF AN ENTRY
       entry.push(fields[i*chunkLength+j])
     }

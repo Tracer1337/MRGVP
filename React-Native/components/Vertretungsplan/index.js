@@ -29,7 +29,7 @@ export default class Vertretungsplan extends Component{
 
   getData(i = 1, res = {info: [], plan: []}){
     this.setState({ refreshing: true })
-    let url =`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${pad(i)}.htm`
+    let url =`https://mrg-online.org/iserv/public/plan/show/Vertretungsplan%20Sch%C3%BCler/ad45b91822493600/f1/subst_${i.toString().padStart(3, "0")}.htm`
     this.setState({ loadingStatus: `Seite ${i} wird geladen...` })
     fetch(url)
     .then(response => {
