@@ -7,7 +7,7 @@ export default class Vertretungsplan extends Component{
   state = {data: null}
 
   getData = async () => {
-    const response = await fetch("http://"+window.location.hostname+"/api")
+    const response = await fetch(".netlify/functions/lambda")
     const data = await response.json()
     this.setState({data})
   }

@@ -1,9 +1,10 @@
 {
+  "webpackServerPort": 19006,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://jm-eg7.merlinm2k.react-native.exp.direct",
+  "packagerNgrokUrl": "https://packager.jm-eg7.merlinm2k.react-native.exp.direct",
+  "ngrokPid": 596,
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPort": 19001,
+  "packagerPid": 2412
 }
