@@ -1,0 +1,20 @@
+{
+    state: <String>,
+    info: {
+        <String>[weekday]: [
+            <String>[infoText],
+            ...
+        ],
+        ...
+    },
+    plan: {
+        <String>[class]: {
+            <String>[weekday]: [
+                [<String>[Stunde], <String>[Vertreter], <String>[Fach], <String>[Raum], <String>[Kommentar]],
+                ...
+            ],
+            ...
+        },
+        ...
+    }
+}
