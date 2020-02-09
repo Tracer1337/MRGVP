@@ -1,26 +1,40 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "name": "vertretungsplan",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "expo": "^33.0.0",
-    "expo-ads-admob": "~5.0.1",
-    "expo-font": "~5.0.1",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "@react-native-community/masked-view": "^0.1.6",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
     "react-native-cheerio": "^1.0.0-rc.4",
-    "react-native-fontawesome": "^6.0.1",
-    "react-native-paper": "^2.6.3",
-    "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-native-gesture-handler": "^1.5.6",
+    "react-native-paper": "^3.6.0",
+    "react-native-reanimated": "^1.7.0",
+    "react-native-safe-area-context": "^0.6.4",
+    "react-native-screens": "^2.0.0-alpha.34",
+    "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^8.0.6",
+    "react-navigation": "^4.1.0",
+    "react-navigation-stack": "^2.1.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.2.0"
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^0.0.7",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "16.9.0"
   },
-  "private": true
+  "jest": {
+    "preset": "react-native"
+  }
 }

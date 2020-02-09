@@ -1,4 +1,0 @@
-[build]
-command = "yarn build"
-functions = ".netlfiy/functions"
-publish = "build"

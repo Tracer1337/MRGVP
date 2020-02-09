@@ -1,0 +1,29 @@
+{
+    "Screens": {
+        "Main": "MRG Vertretungsplan",
+        "Privacy": "Datenschutz",
+        "Menu": "Menü"
+    },
+
+    "LoadingStates": {
+        "Init": "Initialisieren",
+        "LoadingPage": "Seite {} wird geladen...",
+        "Done": "Alle Seiten geladen"
+    },
+
+    "ListView": {
+        "Date": "Stand: ",
+        "Info": "Informationen",
+        "Plan": "Vertretungsplan",
+        "Misc": "Sonstiges",
+        "Lesson": "Stunde: ",
+        "Entries": [
+            "Vertreter: ",
+            "Fach: ",
+            "Raum: ",
+            "Kommentar"
+        ]
+    },
+
+    "Source": "Quelle: https://mrg-online.org/"
+}
