@@ -23,7 +23,8 @@
             "Fach: ",
             "Raum: ",
             "Kommentar: "
-        ]
+        ],
+        "Reload": "Neu Laden"
     },
 
     "Source": "Quelle: https://mrg-online.org/",

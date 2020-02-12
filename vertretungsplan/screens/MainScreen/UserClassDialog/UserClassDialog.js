@@ -21,11 +21,7 @@ export default UserClassDialog = ({
     const [classes, setClasses] = useState([])
 
     const handleRadioValueChange = value => {
-        if(value === radioState) {
-            setRadioState(null)
-        } else {
-            setRadioState(value)
-        }
+        setRadioState(value)
         setHasStateChanged(true)
     }
 

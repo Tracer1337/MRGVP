@@ -2,10 +2,10 @@ import React, { Component } from "react"
 import { StyleSheet } from "react-native"
 import { TouchableRipple, Text } from "react-native-paper"
 
-export default ({onPress, title}) => (
+export default ({onPress, title, style}) => (
     <TouchableRipple
         onPress={onPress}
-        style={styles.entry}
+        style={[styles.entry, style]}
     >
         <Text style={styles.entryTitle}>{title}</Text>
     </TouchableRipple>

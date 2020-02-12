@@ -7,3 +7,5 @@ export const COLORS = {
 export const STORAGE = {
     USERCLASS: "user-class"
 }
+
+export const FETCH_DATA_TIMEOUT = 3000

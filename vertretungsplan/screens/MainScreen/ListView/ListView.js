@@ -1,45 +1,68 @@
-import React, { useState, useEffect, useLayoutEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { ScrollView, StyleSheet, View, RefreshControl } from "react-native"
-import { ActivityIndicator, Text, Title } from "react-native-paper"
+import { ActivityIndicator, Text, Title, IconButton } from "react-native-paper"
 
 import InfoElement from "./InfoElement.js"
 import PlanElement from "./PlanElement.js"
 
 import Strings from "../../../config/strings.json"
-import { STORAGE } from "../../../config/constants.js"
+import { STORAGE, FETCH_DATA_TIMEOUT } from "../../../config/constants.js"
 import fetchData from "../../../utils/fetchData.js"
 import StorageHandler from "../../../utils/StorageHandler.js"
 
-const Header = ({data}) => (
+const Header = ({ data }) => (
     <View style={styles.header}>
         <Text style={styles.headerText}>{Strings.Source}</Text>
         <Text style={styles.headerText}>{Strings.ListView.Date}{data ? data.date : null}</Text>
     </View>
 )
 
+const ReloadAdvicer = ({ visible, onPress }) => visible ? (
+    <IconButton icon="refresh" onPress={onPress} style={styles.reloadAdvicer} size={26}/>
+) : null
+
 export default ListView = ({ onDataReceived }) => {
     const [data, setData] = useState(null)
     const [refreshing, setRefreshing] = useState(false)
     const [loadingState, setLoadingState] = useState(Strings.LoadingStates.Init)
     const [userClass, setUserClass] = useState(null)
+    const [fetchDataTimeout, setFetchDataTimeout] = useState(null)
+    const [fetchDataTimeoutTrigger, setFetchDataTimeoutTrigger] = useState(false)
+    const [cancelToken, setCancelToken] = useState(null)
 
-    const handleLoadingNextPage = (pageNr) => setLoadingState(Strings.LoadingStates.LoadingPage.replace("{}", pageNr))
+    const handleLoadingNextPage = (pageNr) => {
+        if(fetchDataTimeout){
+            clearTimeout(fetchDataTimeout)
+        }
+        setFetchDataTimeout(setTimeout(() => setFetchDataTimeoutTrigger(true), FETCH_DATA_TIMEOUT))
+        setLoadingState(Strings.LoadingStates.LoadingPage.replace("{}", pageNr))
+    }
 
     const load = () => {
+        // Reset states / Cancel previous request
         setRefreshing(true)
+        handleLoadingNextPage(Strings.LoadingStates.Init)
+
+        try {
+            cancelToken.cancel()
+        } catch(error) {}
 
         StorageHandler.getData(STORAGE.USERCLASS).then(data => {
             setUserClass(data)
         })
 
-        fetchData(handleLoadingNextPage).then(data => {
+        let token = {cancel: null}
+        setCancelToken(token)
+
+        fetchData(handleLoadingNextPage, token).then(data => {
+            clearTimeout(fetchDataTimeout)
             setLoadingState(Strings.LoadingStates.Done)
             requestAnimationFrame(() => {
                 if(onDataReceived) onDataReceived(data)
                 setRefreshing(false)
                 setData(data)
             })
-        })
+        }).catch(() => null)
     }
 
     useEffect(load, [])
@@ -56,6 +79,7 @@ export default ListView = ({ onDataReceived }) => {
                     <ActivityIndicator size="large"/>
                     <View style={styles.loadingCaption}>
                         <Text>{loadingState}</Text>
+                        <ReloadAdvicer onPress={load} visible={fetchDataTimeoutTrigger}/>
                     </View>
                 </View>
             </>
@@ -104,15 +128,15 @@ export default ListView = ({ onDataReceived }) => {
                 }
                 >
 
-                <Title style={styles.headline}>{Strings.ListView.Info}</Title>
-                {infoElements}
-
-                {userClass && (
+                {userClass && userElements.length ? (
                     <>
                         <Title style={styles.headline}>{Strings.ListView.UserEntries}</Title>
                         {userElements}
                     </>
-                )}
+                ) : null}
+
+                <Title style={styles.headline}>{Strings.ListView.Info}</Title>
+                {infoElements}
 
                 <Title style={styles.headline}>{Strings.ListView.Plan}</Title>
                 {planElements}
@@ -127,6 +151,18 @@ const styles = StyleSheet.create({
     loadingContainer: {
         flex: 1,
         justifyContent: "center"
+    },
+
+    loadingCaption: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10
+    },
+
+    reloadAdvicer: {
+        marginTop: 10,
+        transform: [{rotateY: "180deg"}]
     },
 
     container: {
@@ -153,12 +189,6 @@ const styles = StyleSheet.create({
 
     headline: {
         marginLeft: 10
-    },
-
-    loadingCaption: {
-        flexDirection: "row",
-        justifyContent: "center",
-        marginTop: 10
     },
 
     spacer: {
