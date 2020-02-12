@@ -8,13 +8,14 @@
     "LoadingStates": {
         "Init": "Initialisieren",
         "LoadingPage": "Seite {} wird geladen...",
-        "Done": "Alle Seiten geladen"
+        "Done": "Liste generieren..."
     },
 
     "ListView": {
         "Date": "Stand: ",
         "Info": "Informationen",
         "Plan": "Vertretungsplan",
+        "UserEntries": "Meine Vertretungen",
         "Misc": "Sonstiges",
         "Lesson": "Stunde: ",
         "Entries": [
@@ -30,7 +31,12 @@
     "UserClassDialog": {
         "Title": "Klasse Auswählen",
         "TextInputLabel": "Manuell Eingeben",
+        "Dismiss": "Abbrechen",
         "Save": "Speichern",
-        "Helper": "Es werden nur diejenigen Klassen angezeigt, die aktuell auf dem Vertretungsplan gelistet sind."
-    }
+        "Helper": "Es werden nur die Klassen angezeigt, die aktuell auf dem Vertretungsplan gelistet sind."
+    },
+
+    "DataStored": "Gespeichert!",
+
+    "Accept": "Ok"
 }

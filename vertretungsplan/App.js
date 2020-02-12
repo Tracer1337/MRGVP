@@ -77,3 +77,5 @@ export {
   screens,
   theme
 }
+
+export const Icon = MaterialIcon
