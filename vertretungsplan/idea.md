@@ -7,6 +7,7 @@
     [ ] Diese per Lokaler-Pushnachricht an den Nutzer senden
 
 [ ] Floating AppBar
+[ ] Tab Navigation mit WebView
 [ ] Ausfall kennzeichnen (roter punkt oder so)
 
 [x] Klasse speichern Feature:
@@ -22,3 +23,4 @@
 [ ] PWA für IOS
 [ ] "Meine Vertretungen" nach Stunden sortieren
 [ ] "Teilen" Button um ausfallende Stunden direkt in Whatsapp / Snapchat weiterleiten zu können
+[ ] Hermes-Engine verwenden
