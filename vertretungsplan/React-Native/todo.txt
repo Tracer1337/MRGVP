@@ -1,4 +1,0 @@
-Nach paar Sekunden, wenn der Plan nicht lädt, neu laden vorschlagen
-Suchfeld
-Appgröße komprimieren
--> Klasse speichern Feature

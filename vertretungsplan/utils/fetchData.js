@@ -16,7 +16,6 @@ export default (onLoadingNextPage, token) => {
                 const CancelToken = axios.CancelToken
                 const source = CancelToken.source()
                 token.cancel = () => {
-                    console.log("[FetchData] Cancel")
                     cancelled = true
                     source.cancel()
                 }
