@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Provider as PaperProvider, DefaultTheme, IconButton } from "react-native-paper"
 import MaterialIcon from "react-native-vector-icons/MaterialIcons"
+import { AdMobBanner } from "react-native-admob"
 
 import MainScreen from "./screens/MainScreen/MainScreen.js"
 import MenuScreen from "./screens/MenuScreen/MenuScreen.js"
@@ -10,7 +11,7 @@ import PrivacyScreen from "./screens/PrivacyScreen/PrivacyScreen.js"
 import ContactScreen from "./screens/ContactScreen/ContactScreen.js"
 import Header from "./components/Header/Header.js"
 
-import { COLORS } from "./config/constants.js"
+import { COLORS, DEV, AD_KEYS } from "./config/constants.js"
 import Strings from "./config/strings.json"
 
 const theme = {
@@ -41,9 +42,13 @@ export default class App extends React.Component {
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName={Strings.Screens.Main}
+            headerMode="float"
             screenOptions={{
               cardStyle: {backgroundColor: COLORS.BACKGROUND},
-              header: Header
+              header: Header,
+              headerStyle: {
+                height: 58
+              }
             }}
           >
 
@@ -68,20 +73,15 @@ export default class App extends React.Component {
             
           </Stack.Navigator>
         </NavigationContainer>
+          
+        <AdMobBanner
+          adSize="fullBanner"
+          adUnitID={DEV ? AD_KEYS.TEST : AD_KEYS.PROD}
+          onAdFailedToLoad={error => console.log("[App] AdMob Error", error)}
+        />
+
       </PaperProvider>
     )
-  }
-
-  bannerError() {
-    return;
-  }
-
-  _handleLoadingError = error => {
-    console.warn(error);
-  }
-
-  _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
   }
 }
 
@@ -89,6 +89,3 @@ export {
   theme,
   Icon
 }
-
-// Dev AD key: ca-app-pub-3940256099942544/6300978111
-// Prod Ad key: ca-app-pub-3609177996275417/1082785682

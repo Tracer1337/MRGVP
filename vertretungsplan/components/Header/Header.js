@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, Animated } from "react-native"
 import { Surface, IconButton, Subheading } from "react-native-paper"
 
 export default Header = ({ scene, previous, navigation }) => {
@@ -15,8 +15,15 @@ export default Header = ({ scene, previous, navigation }) => {
 
     const HeaderRight = options.headerRight
 
+    const progress = Animated.add(scene.progress.current, scene.progress.next || 0)
+
+    const opacity = progress.interpolate({
+        inputRange: [0, 1, 2],
+        outputRange: [0, 1, 0]
+    })
+
     return (
-        <View style={styles.headerContainer}>
+        <Animated.View style={[styles.headerContainer, {opacity}]}>
             <Surface style={styles.header}>
                 {HeaderLeft && <HeaderLeft navigation={navigation} />}
                 <View style={styles.titleWrapper}>
@@ -24,7 +31,7 @@ export default Header = ({ scene, previous, navigation }) => {
                 </View>
                 {HeaderRight && <HeaderRight navigation={navigation} />}
             </Surface>
-        </View>
+        </Animated.View>
     )
 }
 
