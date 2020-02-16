@@ -2,7 +2,8 @@
     "Screens": {
         "Main": "MRG Vertretungsplan",
         "Privacy": "Datenschutz",
-        "Menu": "Menü"
+        "Menu": "Menü",
+        "Contact": "Kontakt"
     },
 
     "LoadingStates": {
@@ -39,5 +40,10 @@
 
     "DataStored": "Gespeichert!",
 
-    "Accept": "Ok"
+    "Accept": "Ok",
+
+    "Contact": {
+        "Name": "Merlin Moelter",
+        "Email": "merlin.moelter@gmail.com"
+    }
 }

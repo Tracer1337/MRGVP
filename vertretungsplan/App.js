@@ -7,6 +7,7 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons"
 import MainScreen from "./screens/MainScreen/MainScreen.js"
 import MenuScreen from "./screens/MenuScreen/MenuScreen.js"
 import PrivacyScreen from "./screens/PrivacyScreen/PrivacyScreen.js"
+import ContactScreen from "./screens/ContactScreen/ContactScreen.js"
 import Header from "./components/Header/Header.js"
 
 import { COLORS } from "./config/constants.js"
@@ -60,6 +61,8 @@ export default class App extends React.Component {
             <Stack.Screen name={Strings.Screens.Menu} component={MenuScreen}/>
             
             <Stack.Screen name={Strings.Screens.Privacy} component={PrivacyScreen}/>
+
+            <Stack.Screen name={Strings.Screens.Contact} component={ContactScreen}/>
             
           </Stack.Navigator>
         </NavigationContainer>
