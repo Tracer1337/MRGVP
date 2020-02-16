@@ -1,4 +1,5 @@
 import React from "react"
+import { NativeModules } from "react-native"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Provider as PaperProvider, DefaultTheme, IconButton } from "react-native-paper"
@@ -13,6 +14,9 @@ import Header from "./components/Header/Header.js"
 
 import { COLORS, DEV, AD_KEYS } from "./config/constants.js"
 import Strings from "./config/strings.json"
+
+const { UIManager } = NativeModules
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
 
 const theme = {
   ...DefaultTheme,
