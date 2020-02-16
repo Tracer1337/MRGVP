@@ -6,6 +6,11 @@
         "Contact": "Kontakt"
     },
 
+    "Icons": {
+        "Privacy": "lock-outline",
+        "Contact": "mail-outline"
+    },
+
     "LoadingStates": {
         "Init": "Initialisieren",
         "LoadingPage": "Seite {} wird geladen...",

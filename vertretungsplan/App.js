@@ -23,6 +23,8 @@ const theme = {
 
 const Stack = createStackNavigator()
 
+const Icon = props => <MaterialIcon {...props} />
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -32,7 +34,7 @@ export default class App extends React.Component {
     return (
       <PaperProvider
         settings={{
-          icon: props => <MaterialIcon {...props} />
+          icon: Icon
         }}
         theme={theme}
       >
@@ -84,10 +86,9 @@ export default class App extends React.Component {
 }
 
 export {
-  theme
+  theme,
+  Icon
 }
-
-export const Icon = MaterialIcon
 
 // Dev AD key: ca-app-pub-3940256099942544/6300978111
 // Prod Ad key: ca-app-pub-3609177996275417/1082785682

@@ -1,45 +1,50 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
-import { IconButton, Text } from "react-native-paper"
+import { StyleSheet, View } from "react-native"
+
+import TouchableText from "../../components/TouchableText/TouchableText.js"
+import { Icon } from "../../App.js"
 
 import Strings from "../../config/strings.json"
 
 export default class ContactScreen extends React.Component{
     render(){
         return (
-            <View>
-                <View style={styles.column}>
-                    <IconButton 
-                        icon="person-outline" 
-                        size={26}
+            <View style={styles.container}>
+                <TouchableText
+                    title={Strings.Contact.Name}
+                    textStyle={styles.text}
+                    Before={<Icon
+                        name="person-outline"
+                        size={20}
                         style={styles.icon}
-                    />
-                    <Text style={styles.text}>{Strings.Contact.Name}</Text>
-                </View>
-                <View style={styles.column}>
-                    <IconButton 
-                        icon="mail-outline" 
-                        size={26}
+                    />}
+                />
+                <TouchableText
+                    title={Strings.Contact.Email}
+                    textStyle={styles.text}
+                    Before={<Icon
+                        name="mail-outline"
+                        size={20}
                         style={styles.icon}
-                    />
-                    <Text style={styles.text}>{Strings.Contact.Email}</Text>
-                </View>
+                    />}
+                />
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    column: {
-        flexDirection: "row",
-        alignItems: "center"    
+    container: {
+        flex: 1,
+        padding: 10
     },
 
     icon: {
-        margin: 0
+        margin: 0,
+        marginRight: 10
     },
 
     text: {
-        fontSize: 16
+        fontSize: 18
     }
 })

@@ -1,7 +1,8 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import React from "react"
+import { StyleSheet, View } from "react-native"
 
 import TouchableText from "../../components/TouchableText/TouchableText.js"
+import { Icon } from "../../App.js"
 
 import Strings from "../../config/strings.json"
 
@@ -12,9 +13,11 @@ export default class MenuScreen extends React.Component {
         super(props)
 
         this.entries = []
-        for(let name of Object.values(Strings.Screens)) {
+        for(let key in Strings.Screens) {
+            const name = Strings.Screens[key]
+            const icon = Strings.Icons[key]
             if(!excludeScreens.includes(name)) {
-                this.entries.push(name)
+                this.entries.push({name, icon})
             }
         }
     }
@@ -22,10 +25,11 @@ export default class MenuScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {this.entries.map((name, i) => (
+                {this.entries.map((e, i) => (
                     <TouchableText
-                        onPress={() => this.props.navigation.navigate(name)}
-                        title={name}
+                        onPress={() => this.props.navigation.navigate(e.name)}
+                        title={e.name}
+                        Before={<Icon size={20} name={e.icon} style={styles.icon}/>}
                         key={"Menu-"+i}
                     />
                 ))}
@@ -38,5 +42,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10
+    },
+
+    icon: {
+        margin: 0,
+        marginRight: 10
     }
 })
