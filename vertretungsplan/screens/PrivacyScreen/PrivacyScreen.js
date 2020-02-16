@@ -2,14 +2,9 @@ import React from 'react'
 import { StyleSheet, ScrollView, Text } from 'react-native'
 import Link from "../../components/Link/Link.js"
 
-import Strings from "../../config/strings.json"
 import { COLORS } from "../../config/constants.js"
 
 export default class PrivacyScreen extends React.Component{
-  static navigationOptions = {
-    title: Strings.Screens.Privacy
-  }
-
   render(){
     return(
       <ScrollView style={styles.container}>

@@ -19,30 +19,26 @@ const MODES = {
 const SWITCH_MODE = "switchMode"
 
 export default class MainScreen extends React.Component{
-    static navigationOptions = ({navigation}) => ({
-        title: Strings.Screens.Main,
-        headerLeft: () => (
-            <IconButton
-                onPress={() => navigation.navigate("Menu")}
-                icon="menu"
-            />
-        ),
-        headerRight: () => (
-            <IconButton
-                onPress={navigation.getParam(SWITCH_MODE)}
-                icon="chevron-right"
-                size={26}
-            />
-        )
-    })
-
-    state = { 
-        mode: MODES.LIST, 
+    state = {
+        mode: MODES.LIST,
         sharedData: null,
         userClass: null,
         userClassDialogVisible: false,
         snackbarVisible: false,
         listViewReloadKey: 0
+    }
+
+    constructor(props){
+        super(props)
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <IconButton
+                    icon="chevron-right"
+                    onPress={this.switchMode}
+                    size={26}
+                />
+            )
+        })
     }
 
     switchMode = () => {

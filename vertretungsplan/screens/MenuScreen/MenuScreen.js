@@ -7,34 +7,28 @@ import Strings from "../../config/strings.json"
 import { screens } from "../../App.js"
 import { COLORS } from "../../config/constants.js"
 
-const excludeScreens = ["Menu", "Main"]
+const excludeScreens = [Strings.Screens.Main, Strings.Screens.Menu]
 
 export default class MenuScreen extends React.Component {
-    static navigationOptions = {
-        title: Strings.Screens.Menu
-    }
-
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.entries = []
-        for(let key in screens){
-            if(excludeScreens.includes(key)) continue
-            this.entries.push({
-                title: Strings.Screens[key],
-                link: key
-            })
+        for(let name of Object.values(Strings.Screens)) {
+            if(!excludeScreens.includes(name)) {
+                this.entries.push(name)
+            }
         }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                {this.entries.map((e, i) => (
+                {this.entries.map((name, i) => (
                     <TouchableText
-                        onPress={() => this.props.navigation.navigate(e.link)}
-                        title={e.title}
-                        key={`Menu-${i}`}
+                        onPress={() => this.props.navigation.navigate(name)}
+                        title={name}
+                        key={"Menu-"+i}
                     />
                 ))}
             </View>

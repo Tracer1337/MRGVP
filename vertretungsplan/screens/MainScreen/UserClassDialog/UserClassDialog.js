@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { View, StyleSheet } from "react-native"
+import { View, ScrollView, StyleSheet } from "react-native"
 import { Dialog, Portal, TextInput, Button, Divider, RadioButton, Caption, Text, IconButton } from "react-native-paper"
 
 import Strings from "../../../config/strings.json"
@@ -82,26 +82,29 @@ export default UserClassDialog = ({
 
                 <Divider/>
 
-                <Dialog.Content>
+                <Dialog.ScrollArea>
                     <Caption>{Strings.UserClassDialog.Helper}</Caption>
 
-                    <RadioButton.Group
-                        value={radioState}
-                        onValueChange={handleRadioValueChange}
-                    >
-                        {classes.map((cls, i) => cls && (
-                            <View style={styles.radioWrapper} key={i}>
-                                <RadioButton value={cls} color={theme.colors.primary}/>
-                                <Text style={styles.radioLabel}>{cls}</Text>
-                            </View>
-                        ))}
-                    </RadioButton.Group>
-
-                    <IconButton 
-                        onPress={handleRemove} 
-                        icon={() => <Icon name="remove-circle-outline" size={24} color={COLORS.RED} />} 
-                        style={styles.remove}
-                    />
+                    <View style={styles.scrollWrapper}>
+                        <ScrollView persistentScrollbar>
+                            <RadioButton.Group
+                                value={radioState}
+                                onValueChange={handleRadioValueChange}
+                            >
+                                {classes.map((cls, i) => cls && (
+                                    <View style={styles.radioWrapper} key={i}>
+                                        <RadioButton value={cls} color={theme.colors.primary}/>
+                                        <Text style={styles.radioLabel}>{cls}</Text>
+                                    </View>
+                                ))}
+                            </RadioButton.Group>
+                            <IconButton 
+                                onPress={handleRemove} 
+                                icon={() => <Icon name="remove-circle-outline" size={24} color={COLORS.RED} />} 
+                                style={styles.remove}
+                            />
+                        </ScrollView>
+                    </View>
 
                     <TextInput
                         label={Strings.UserClassDialog.TextInputLabel}
@@ -110,7 +113,7 @@ export default UserClassDialog = ({
                         dense
                         mode="outlined"
                     />
-                </Dialog.Content>
+                </Dialog.ScrollArea>
 
                 <Dialog.Actions>
                     <Button onPress={handleSave} disabled={!hasStateChanged}>{Strings.UserClassDialog.Save}</Button>
@@ -122,6 +125,10 @@ export default UserClassDialog = ({
 }
 
 const styles = StyleSheet.create({
+    scrollWrapper: {
+        maxHeight: 250
+    },
+
     radioWrapper: {
         flexDirection: "row"
     },
