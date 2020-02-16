@@ -80,7 +80,7 @@ export default class App extends React.Component {
           
         <AdMobBanner
           adSize="fullBanner"
-          adUnitID={DEV ? AD_KEYS.TEST : AD_KEYS.PROD}
+          adUnitID={DEV ? AD_KEYS.DEV : AD_KEYS.PROD}
           onAdFailedToLoad={error => console.log("[App] AdMob Error", error)}
         />
 

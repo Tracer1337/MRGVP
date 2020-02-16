@@ -6,7 +6,7 @@
 &nbsp;&nbsp;[ ] Ausfallende Stunden der gespeicherten Klasse bestimmen
 &nbsp;&nbsp;[ ] Diese per Lokaler-Pushnachricht an den Nutzer senden
 
-[ ] Floating AppBar
+[x] Floating AppBar
 [ ] Tab Navigation mit WebView
 [ ] Ausfall kennzeichnen (roter punkt oder so)
 

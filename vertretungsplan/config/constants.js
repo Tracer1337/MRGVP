@@ -1,4 +1,4 @@
-export const DEV = true
+export const DEV = false
 
 export const COLORS = {
     BACKGROUND: "white",
@@ -13,6 +13,6 @@ export const STORAGE = {
 export const FETCH_DATA_TIMEOUT = 3000
 
 export const AD_KEYS = {
-    TEST: "ca-app-pub-3940256099942544/6300978111",
+    DEV: "ca-app-pub-3940256099942544/6300978111",
     PROD: "ca-app-pub-3609177996275417/1082785682"
 }

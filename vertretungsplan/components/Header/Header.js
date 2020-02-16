@@ -2,6 +2,8 @@ import React from "react"
 import { StyleSheet, View, Animated } from "react-native"
 import { Surface, IconButton, Subheading } from "react-native-paper"
 
+import { COLORS } from "../../config/constants.js"
+
 export default Header = ({ scene, previous, navigation }) => {
     const { options } = scene.descriptor
     const title = options.headerTitle || options.title || scene.route.name
@@ -38,6 +40,7 @@ export default Header = ({ scene, previous, navigation }) => {
 
 const styles = StyleSheet.create({
     headerContainer: {
+        backgroundColor: COLORS.BACKGROUND
     },
 
     header: {
