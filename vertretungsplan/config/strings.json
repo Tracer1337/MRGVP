@@ -8,7 +8,7 @@
     "LoadingStates": {
         "Init": "Initialisieren",
         "LoadingPage": "Seite {} wird geladen...",
-        "Done": "Liste generieren..."
+        "Done": "Liste erstellen..."
     },
 
     "ListView": {

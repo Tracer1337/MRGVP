@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { View, StyleSheet } from "react-native"
 import { IconButton, FAB, Snackbar } from "react-native-paper"
 
@@ -31,13 +31,22 @@ export default class MainScreen extends React.Component{
     constructor(props){
         super(props)
         this.props.navigation.setOptions({
-            headerRight: () => (
-                <IconButton
-                    icon="chevron-right"
-                    onPress={this.switchMode}
-                    size={26}
-                />
-            )
+            headerRight: () => {
+                const [reverse, setReverse] = useState(false)
+
+                const handlePress = () => {
+                    setReverse(!reverse)
+                    this.switchMode()
+                }
+
+                return (
+                    <IconButton
+                        icon={`chevron-${reverse ? "left" : "right"}`}
+                        onPress={handlePress}
+                        size={26}
+                    />
+                )
+            }
         })
     }
 
@@ -130,8 +139,7 @@ export default class MainScreen extends React.Component{
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: COLORS.BACKGROUND    
+        flex: 1
     },
 
     fab: {

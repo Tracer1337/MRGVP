@@ -2,8 +2,6 @@ import React from 'react'
 import { StyleSheet, ScrollView, Text } from 'react-native'
 import Link from "../../components/Link/Link.js"
 
-import { COLORS } from "../../config/constants.js"
-
 export default class PrivacyScreen extends React.Component{
   render(){
     return(
@@ -34,8 +32,7 @@ export default class PrivacyScreen extends React.Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: COLORS.BACKGROUND
+    padding: 10
   },
 
   headline: {

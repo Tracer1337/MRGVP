@@ -4,8 +4,6 @@ import { View, StyleSheet } from 'react-native'
 import TouchableText from "../../components/TouchableText/TouchableText.js"
 
 import Strings from "../../config/strings.json"
-import { screens } from "../../App.js"
-import { COLORS } from "../../config/constants.js"
 
 const excludeScreens = [Strings.Screens.Main, Strings.Screens.Menu]
 
@@ -39,7 +37,6 @@ export default class MenuScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
-        backgroundColor: COLORS.BACKGROUND
+        padding: 10
     }
 })

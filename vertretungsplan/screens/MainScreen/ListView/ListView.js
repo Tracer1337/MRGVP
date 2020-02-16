@@ -113,37 +113,34 @@ export default ListView = ({ onDataReceived }) => {
 
     // Klasse / Stunde / Vertreter / Fach / Raum / Kommentar
     return (
-        <>
+        <ScrollView
+            style={styles.container}
+            refreshControl={
+                <RefreshControl 
+                refreshing={refreshing}
+                onRefresh={load}
+                />
+            }
+        >
             {refreshing ? <Text style={styles.refresh}>{loadingState}</Text> : null}
 
             <Header data={data}/>
 
-            <ScrollView
-                style={styles.container}
-                refreshControl={
-                    <RefreshControl 
-                        refreshing={refreshing}
-                        onRefresh={load}
-                    />
-                }
-                >
+            {userClass && userElements.length ? (
+                <>
+                    <Title style={styles.headline}>{Strings.ListView.UserEntries}</Title>
+                    {userElements}
+                </>
+            ) : null}
 
-                {userClass && userElements.length ? (
-                    <>
-                        <Title style={styles.headline}>{Strings.ListView.UserEntries}</Title>
-                        {userElements}
-                    </>
-                ) : null}
+            <Title style={styles.headline}>{Strings.ListView.Info}</Title>
+            {infoElements}
 
-                <Title style={styles.headline}>{Strings.ListView.Info}</Title>
-                {infoElements}
-
-                <Title style={styles.headline}>{Strings.ListView.Plan}</Title>
-                {planElements}
-                
-                <View style={styles.spacer}/>
-            </ScrollView>
-        </>
+            <Title style={styles.headline}>{Strings.ListView.Plan}</Title>
+            {planElements}
+            
+            <View style={styles.spacer}/>
+        </ScrollView>
     )
 }
 

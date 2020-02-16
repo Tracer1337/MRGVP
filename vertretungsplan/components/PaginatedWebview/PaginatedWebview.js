@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react"
 import { Text, StyleSheet, View } from "react-native"
-import { IconButton } from "react-native-paper"
+import { IconButton, Divider } from "react-native-paper"
 import { WebView } from "react-native-webview"
 
 export default ({ generateUrl, normalizeContent, sourceString }) => {
@@ -29,6 +29,8 @@ export default ({ generateUrl, normalizeContent, sourceString }) => {
                 onLoadEnd={init}
                 style={styles.webview}
             />
+
+            <Divider/>
 
             <View style={styles.footer}>
 
@@ -64,12 +66,10 @@ const styles = StyleSheet.create({
         height: 50,
         flexDirection: "row",
         justifyContent: "space-around",
-        backgroundColor: "white",
-        borderTopWidth: 1
+        backgroundColor: "white"
     },
 
     chevron: {
-
     },
 
     switchPage: {

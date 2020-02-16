@@ -7,6 +7,8 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons"
 import MainScreen from "./screens/MainScreen/MainScreen.js"
 import MenuScreen from "./screens/MenuScreen/MenuScreen.js"
 import PrivacyScreen from "./screens/PrivacyScreen/PrivacyScreen.js"
+import Header from "./components/Header/Header.js"
+
 import { COLORS } from "./config/constants.js"
 import Strings from "./config/strings.json"
 
@@ -36,6 +38,10 @@ export default class App extends React.Component {
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName={Strings.Screens.Main}
+            screenOptions={{
+              cardStyle: {backgroundColor: COLORS.BACKGROUND},
+              header: Header
+            }}
           >
 
             <Stack.Screen 
@@ -60,6 +66,7 @@ export default class App extends React.Component {
       </PaperProvider>
     )
   }
+
   bannerError() {
     return;
   }
