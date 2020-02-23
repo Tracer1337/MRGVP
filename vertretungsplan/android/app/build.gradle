@@ -131,8 +131,8 @@ android {
         applicationId "com.vertretungsplan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 11
-        versionName "2.69"
+        versionCode 12
+        versionName "2.69.1"
         multiDexEnabled true
     }
     splits {
