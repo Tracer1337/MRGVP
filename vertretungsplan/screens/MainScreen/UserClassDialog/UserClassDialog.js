@@ -5,7 +5,8 @@ import { Dialog, Portal, TextInput, Button, Divider, RadioButton, Caption, Text,
 import Strings from "../../../config/strings.json"
 import { STORAGE, COLORS } from "../../../config/constants.js"
 import { theme, Icon } from "../../../App.js"
-import StorageHandler from "../../../utils/StorageHandler.js" 
+import StorageHandler from "../../../utils/StorageHandler.js"
+import sortByClass from "../../../utils/sortByClass.js"
 
 const classesRegex = /(\d{1,2}[a-z]?)|(S\d?\/\d?)/g
 
@@ -54,6 +55,7 @@ export default UserClassDialog = ({
                 }
             })
         }
+        newClasses.sort(sortByClass)
         setClasses(newClasses)
     }, [data])
 

@@ -8,7 +8,7 @@
         ...
     },
     plan: {
-        <String>(Klasse)]: {
+        <String>(Klasse): {
             <String>(Wochentag): [
                 [<String>(Stunde), <String>(Vertreter), <String>(Fach), <String>(Raum), <String>(Kommentar)],
                 ...

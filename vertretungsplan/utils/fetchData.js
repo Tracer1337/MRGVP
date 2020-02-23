@@ -47,7 +47,7 @@ export default (onLoadingNextPage, token) => {
                 resolve(data)
             }
         }
-
+        
         fetchData(onLoadingNextPage)
     })
 }

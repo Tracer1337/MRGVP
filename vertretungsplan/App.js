@@ -12,7 +12,7 @@ import PrivacyScreen from "./screens/PrivacyScreen/PrivacyScreen.js"
 import ContactScreen from "./screens/ContactScreen/ContactScreen.js"
 import Header from "./components/Header/Header.js"
 
-import { COLORS, DEV, AD_KEYS } from "./config/constants.js"
+import { COLORS, AD_KEYS } from "./config/constants.js"
 import Strings from "./config/strings.json"
 
 const { UIManager } = NativeModules
@@ -80,7 +80,7 @@ export default class App extends React.Component {
           
         <AdMobBanner
           adSize="fullBanner"
-          adUnitID={DEV ? AD_KEYS.DEV : AD_KEYS.PROD}
+          adUnitID={__DEV__ ? AD_KEYS.DEV : AD_KEYS.PROD}
           onAdFailedToLoad={error => console.log("[App] AdMob Error", error)}
         />
 

@@ -69,7 +69,7 @@ export default ListView = ({ onDataReceived }) => {
 
     let infoElements = []
     let planElements = []
-    let userElements = []
+    let userElement = null
 
     if(!data) {
         return (
@@ -95,20 +95,29 @@ export default ListView = ({ onDataReceived }) => {
                 />
             )
         )
-
-        let prevWeekday = null
-
+        
         // Create plan elements from data
         data.plan.forEach((weekdays, cls) => 
-            weekdays.forEach((entries, weekday) => {
-                const props = {entries, cls, weekday, key: cls+weekday}
-                if(userClass && cls.includes(userClass)){
-                    userElements.push(<PlanElement {...props} raw showWeekday={prevWeekday === null || prevWeekday !== weekday}/>)
-                    prevWeekday = weekday
-                }
-                planElements.push(<PlanElement {...props}/>)
-            })
+            planElements.push(
+                <PlanElement 
+                    weekdays={weekdays} 
+                    cls={cls} 
+                    key={cls}
+                />
+            )
         )
+
+        // Create user elements from data
+        if(userClass) {
+            const userData = data.getClassData(userClass)
+            userElement = (
+                <PlanElement 
+                    weekdays={userData}
+                    cls={userClass}
+                    raw
+                />
+            )
+        }
     }
 
     // Klasse / Stunde / Vertreter / Fach / Raum / Kommentar
@@ -126,10 +135,10 @@ export default ListView = ({ onDataReceived }) => {
 
             <Header data={data}/>
 
-            {userClass && userElements.length ? (
+            {userClass ? (
                 <>
                     <Title style={styles.headline}>{Strings.ListView.UserEntries}</Title>
-                    {userElements}
+                    {userElement}
                 </>
             ) : null}
 

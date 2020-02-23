@@ -3,7 +3,7 @@ export default class DataParser{
 
     static extractWeekday = rawString => rawString.match(/[0-9]+.[0-9]+.[0-9]+ [A-z]+/g)[0]
 
-    static extractClass = rawString => rawString.substr(0, rawString.indexOf(" ") !== -1 ? rawString.indexOf(" ") : rawString.length)
+    static extractClass = rawString => rawString.match(/(\d+|S\d{1}\/\d{1})/)[0]
 
     static parseWeekday = $ => {
         // Get weekday and parse it to schema "<Weekday> (<Date>)"

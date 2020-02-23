@@ -18,29 +18,33 @@ const Table = ({data, style}) => (
     </View>
 )
 
-export default ({ entries, cls, weekday, raw, showWeekday }) => {
-    const children = (
-        <>
-            {showWeekday && (
+export default ({ cls, weekdays, raw }) => {
+    const children = []
+
+    let prevWeekday = null
+
+    weekdays.forEach((entries, weekday) => {
+        if(prevWeekday === null || prevWeekday !== weekday) {
+            children.push(
                 <>
                     <Title style={styles.title}>{weekday}</Title>
                     <Divider />
                 </>
-            )}
-            {
-                entries.map((entry, i) => {
-                    const isLastEntry = i < entries.length - 1
-                    return (
-                        <Surface style={styles.surface} key={i}>
-                            <Table data={entry} key={i} />
-                        </Surface>
-                    )
-                })
-            }
-        </>
-    )
+            )
+        }
+
+        entries.map((entry, i) => {
+            const isLastEntry = i < entries.length - 1
+            children.push(
+                <Surface style={styles.surface} key={weekday+i}>
+                    <Table data={entry} />
+                </Surface>
+            )
+        })
+    })
 
     if(raw) return children
+
     return (
         <ExtendedAccordion title={!cls.trim() ? Strings.ListView.Misc : cls}>
             {children}

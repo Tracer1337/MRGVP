@@ -1,4 +1,5 @@
 import DataParser from "./DataParser.js"
+import sortByClass from "./sortByClass.js"
 
 export default class DataContainer{
     static PlanChunkLength = 6
@@ -13,25 +14,7 @@ export default class DataContainer{
      * Sort the plan map
      */
     sort = () => {
-        // Sort the keys
-        const sortByClass = ([a], [b]) => {
-            // Filter "MP" and empty field
-            if (a.indexOf("MP") !== -1 || !Boolean(a.trim())) return 1
-            if (b.indexOf("MP") !== -1 || !Boolean(b.trim())) return -1
-
-            // Extract the classes as integers ("7A" => 7)
-            a = parseInt(DataParser.extractClass(a))
-            b = parseInt(DataParser.extractClass(b))
-            
-            // Filter NaN => S1/2 & S3/4
-            if (!a) return 1
-            if (!b) return -1
-
-            return a - b
-        }
-        
-        // Build sorted map
-        this.plan = new Map([...this.plan.entries()].sort(sortByClass))
+        this.plan = new Map([...this.plan.entries()].sort(([a], [b]) => sortByClass(a, b)))
     }
 
     addRaw = $ => {
@@ -75,5 +58,25 @@ export default class DataContainer{
         for (let field of fields) {
             if (!this.info.get(weekday).includes(field)) this.info.get(weekday).push(field)
         }
+    }
+
+    /**
+     * Merge the entries of all classes which keys are including the target key
+     */
+    getClassData = targetCls => {
+        const classElements = new Map()
+        
+        this.plan.forEach((weekdays, cls) => {
+            if(cls.includes(targetCls)) {
+                weekdays.forEach((entries, weekday) => {
+                    if (!classElements.get(weekday)) {
+                        classElements.set(weekday, [])
+                    }
+                    classElements.get(weekday).push(...entries)
+                })
+            }
+        })
+
+        return classElements
     }
 }
